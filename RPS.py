@@ -6,7 +6,15 @@ This file supports the CLI RPS game :)
 
 import random
 
+WIN_MESSAGE = "You win!"
+LOSE_MESSAGE = "You lose!"
+TIE_MESSAGE = "Tie!"
+
 class RPS:
+    def __init__(self):
+        self.playerScore = 0
+        self.cpuScore = 0
+
     def play(self):
         choices = ["r", "p", "s"]
         print("What do you choose? (R, P, S)")
@@ -22,19 +30,26 @@ class RPS:
         cpuChoice = choices[random.randint(0, len(choices) - 1)]
 
         outcomes = {
-            ("r", "r"): "Tie!",
-            ("r", "p"): "You lose!",
-            ("r", "s"): "You win!",
-            ("p", "r"): "You win!",
-            ("p", "p"): "Tie!",
-            ("p", "s"): "You lose!",
-            ("s", "r"): "You lose!",
-            ("s", "p"): "You win!",
-            ("s", "s"): "Tie!",
+            ("r", "r"): TIE_MESSAGE,
+            ("r", "p"): LOSE_MESSAGE,
+            ("r", "s"): WIN_MESSAGE,
+            ("p", "r"): WIN_MESSAGE,
+            ("p", "p"): TIE_MESSAGE,
+            ("p", "s"): LOSE_MESSAGE,
+            ("s", "r"): LOSE_MESSAGE,
+            ("s", "p"): WIN_MESSAGE,
+            ("s", "s"): TIE_MESSAGE,
         }
 
+        result = outcomes[(playerChoice, cpuChoice)]
         print(f"CPU chose: {cpuChoice}")
-        print(outcomes[(playerChoice, cpuChoice)])
+        print(result)
+        if result == WIN_MESSAGE:
+            self.playerScore += 1
+        if result == LOSE_MESSAGE:
+            self.cpuScore += 1
+
+        print(f"Score-> Player: {self.playerScore} CPU: {self.cpuScore}")
 
     def main(self) -> None:
         while True:
