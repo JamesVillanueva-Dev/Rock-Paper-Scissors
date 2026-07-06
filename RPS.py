@@ -49,7 +49,7 @@ class RPS:
         if result == LOSE_MESSAGE:
             self.cpuScore += 1
 
-        print(f"Score-> Player: {self.playerScore} CPU: {self.cpuScore}")
+        print(f"Score-> Player: {self.playerScore} CPU: {self.cpuScore} \n")
 
     def main(self) -> None:
         while True:
